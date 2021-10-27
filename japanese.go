@@ -3,7 +3,7 @@ package lngdb
 import "golang.org/x/text/language"
 
 var Japanese = &Lng{
-	Tag:       language.Japanese,
+	Tag:       language.MustParse("ja-JP"),
 	LocalName: "日本語",
 	Locale: &LngLocale{
 		AbDay:    []string{"日", "月", "火", "水", "木", "金", "土"},

@@ -3,7 +3,7 @@ package lngdb
 import "golang.org/x/text/language"
 
 var Korean = &Lng{
-	Tag:       language.Korean,
+	Tag:       language.MustParse("ko-KR"),
 	LocalName: "한국어",
 	Locale: &LngLocale{
 		AbDay:    []string{"일", "월", "화", "수", "목", "금", "토"},

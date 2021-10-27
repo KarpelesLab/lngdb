@@ -3,7 +3,7 @@ package lngdb
 import "golang.org/x/text/language"
 
 var AmericanEnglish = &Lng{
-	Tag:       language.AmericanEnglish,
+	Tag:       language.MustParse("en-US"),
 	LocalName: "English (US)",
 	Locale: &LngLocale{
 		AbDay:    []string{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"},
@@ -20,7 +20,7 @@ var AmericanEnglish = &Lng{
 }
 
 var BritishEnglish = &Lng{
-	Tag:       language.BritishEnglish,
+	Tag:       language.MustParse("en-GB"),
 	LocalName: "English (UK)",
 	Locale: &LngLocale{
 		AbDay:    []string{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"},
@@ -33,5 +33,22 @@ var BritishEnglish = &Lng{
 		DFmt:     "%d/%m/%y",
 		TFmt:     "%T",
 		TFmtAmPm: "%l:%M:%S %P %Z",
+	},
+}
+
+var AustralianEnglish = &Lng{
+	Tag:       language.MustParse("en-AU"),
+	LocalName: "English (AU)",
+	Locale: &LngLocale{
+		AbDay:    []string{"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"},
+		Day:      []string{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"},
+		AbMon:    []string{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"},
+		Mon:      []string{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"},
+		AmStr:    "AM",
+		PmStr:    "PM",
+		DTFmt:    "%a %d %b %Y %T",
+		DFmt:     "%d/%m/%y",
+		TFmt:     "%T",
+		TFmtAmPm: "%I:%M:%S %p",
 	},
 }
