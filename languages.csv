@@ -1,0 +1,23 @@
+file,token,local_name,variable
+german.go,de-DE,Deutsche,German
+english.go,en-AU,English (AU),AustralianEnglish
+english.go,en-EU,English (EU),EuropeanEnglish
+english.go,en-GB,English (UK),BritishEnglish
+english.go,en-US,English (US),AmericanEnglish
+spanish.go,es-ES,Español,Spanish
+spanish.go,es-MX,Español (MX),MexicanSpanish
+french.go,fr-FR,Français,French
+hindi.go,hi-IN,हिन्दी,Hindi
+italian.go,it-IT,Italiano,Italian
+japanese.go,ja-JP,日本語,Japanese
+korean.go,ko-KR,한국어,Korean
+dutch.go,nl-NL,Nederlands,Dutch
+polish.go,pl-PL,język,Polish
+portuguese.go,pt-BR,Portuguesa (BR),BrazilianPortuguese
+portuguese.go,pt-PT,Portuguesa,Portuguese
+tables.go,ru-RU,ру́сский,Russian
+tables.go,sv-SE,Svenska,Swedish
+tables.go,th-TH,ภาษาไทย ,Thai
+chinese.go,zh-CN,汉语,SimplifiedChinese
+chinese.go,zh-HK,漢語 (HK),HongKongChinese
+chinese.go,zh-TW,漢語 (TW),TaiwanChinese
