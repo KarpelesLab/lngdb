@@ -3,7 +3,7 @@ package lngdb
 import "golang.org/x/text/language"
 
 type Lng struct {
-	language.Tag
+	Tag       language.Tag
 	LocalName string `json:"Local_Name"` // name of language in the language itself
 	Locale    *LngLocale
 }
@@ -19,8 +19,8 @@ type LngLocale struct {
 	DFmt     string   `json:"D_FMT"`
 	TFmt     string   `json:"T_FMT"`
 	TFmtAmPm string   `json:"T_FMT_AMPM"`
-	Era      string   `json:"ERA,omitempty"`
-	EraDTFmt string   `json:"ERA_D_T_FMT,omitempty"`
-	EraDFmt  string   `json:"ERA_D_FMT,omitempty"`
-	EraTFmt  string   `json:"ERA_T_FMT,omitempty"`
+	Era      string   `json:"ERA"`
+	EraDTFmt string   `json:"ERA_D_T_FMT"`
+	EraDFmt  string   `json:"ERA_D_FMT"`
+	EraTFmt  string   `json:"ERA_T_FMT"`
 }
