@@ -18,7 +18,7 @@ $locale_fields = [
 	'ERA_T_FMT' => 'EraTFmt',
 ];
 
-$output = ['table.go' => []];
+$output = [];
 
 while(!feof($fp)) {
 	$tmp = fgetcsv($fp);
@@ -46,30 +46,34 @@ while(!feof($fp)) {
 		}
 	}
 
-	$output['table.go'][$lin['variable']] = [$lin, $locale];
+	$output[$lin['variable']] = [$lin, $locale];
 }
 
-foreach($output as $file => $lngs) {
-	$fp = fopen($file, 'w');
-	fwrite($fp, "package lngdb\n\nimport \"golang.org/x/text/language\"\n\n");
+$fp = fopen('table.go', 'w');
+fwrite($fp, "package lngdb\n\nimport \"golang.org/x/text/language\"\n\n");
 
-	foreach($lngs as $var => $info) {
-		$lin = $info[0];
-		$locale = $info[1];
-		fwrite($fp, 'var '.$var." = &Lng{\n");
-		fwrite($fp, "\tTag:       language.MustParse(\"".$lin['token']."\"),\n");
-		fwrite($fp, "\tLocalName: \"".$lin["local_name"]."\",\n");
-		fwrite($fp, "\tLocale: &LngLocale{\n");
-		foreach($locale as $key => $val) {
-			if (!$val) continue;
-			if (is_array($val)) {
-				$val = '[]string{"'.implode('", "', $val).'"}';
-			} else {
-				$val = '"'.$val.'"';
-			}
-			fwrite($fp, "\t\t".$key.': '.$val.",\n");
+fwrite($fp, "var Languages = map[string]*Lng{\n");
+foreach($output as $var => $info) {
+	fwrite($fp, "\t\"".$info[0]['token']."\": $var,\n");
+}
+fwrite($fp, "}\n\n");
+
+foreach($output as $var => $info) {
+	$lin = $info[0];
+	$locale = $info[1];
+	fwrite($fp, 'var '.$var." = &Lng{\n");
+	fwrite($fp, "\tTag:       language.MustParse(\"".$lin['token']."\"),\n");
+	fwrite($fp, "\tLocalName: \"".$lin["local_name"]."\",\n");
+	fwrite($fp, "\tLocale: &LngLocale{\n");
+	foreach($locale as $key => $val) {
+		if (!$val) continue;
+		if (is_array($val)) {
+			$val = '[]string{"'.implode('", "', $val).'"}';
+		} else {
+			$val = '"'.$val.'"';
 		}
-		fwrite($fp, "\t},\n");
-		fwrite($fp, "}\n\n");
+		fwrite($fp, "\t\t".$key.': '.$val.",\n");
 	}
+	fwrite($fp, "\t},\n");
+	fwrite($fp, "}\n\n");
 }

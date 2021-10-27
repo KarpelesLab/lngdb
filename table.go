@@ -2,6 +2,31 @@ package lngdb
 
 import "golang.org/x/text/language"
 
+var Languages = map[string]*Lng{
+	"de-DE": German,
+	"en-AU": AustralianEnglish,
+	"en-EU": EuropeanEnglish,
+	"en-GB": BritishEnglish,
+	"en-US": AmericanEnglish,
+	"es-ES": Spanish,
+	"es-MX": MexicanSpanish,
+	"fr-FR": French,
+	"hi-IN": Hindi,
+	"it-IT": Italian,
+	"ja-JP": Japanese,
+	"ko-KR": Korean,
+	"nl-NL": Dutch,
+	"pl-PL": Polish,
+	"pt-BR": BrazilianPortuguese,
+	"pt-PT": Portuguese,
+	"ru-RU": Russian,
+	"sv-SE": Swedish,
+	"th-TH": Thai,
+	"zh-CN": SimplifiedChinese,
+	"zh-HK": HongKongChinese,
+	"zh-TW": TaiwanChinese,
+}
+
 var German = &Lng{
 	Tag:       language.MustParse("de-DE"),
 	LocalName: "Deutsche",
