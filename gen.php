@@ -14,7 +14,7 @@ $locale_fields = [
 	'LC_TIME.d_fmt' => 'DFmt',
 	'LC_TIME.t_fmt' => 'TFmt',
 	'LC_TIME.t_fmt_ampm' => 'TFmtAmPm',
-	'LC_TIME.era' => 'Era',
+	'LC_TIME.era' => 'Era*',
 	'LC_TIME.era_d_t_fmt' => 'EraDTFmt',
 	'LC_TIME.era_d_fmt' => 'EraDFmt',
 	'LC_TIME.era_t_fmt' => 'EraTFmt',
@@ -22,6 +22,8 @@ $locale_fields = [
 	'LC_MESSAGES.nostr' => 'NoStr',
 	'LC_NUMERIC.decimal_point' => 'DecimalPoint',
 	'LC_NUMERIC.thousands_sep' => 'ThousandsSep',
+	'LC_ADDRESS.lang_name' => 'LangName',
+	'LC_ADDRESS.country_name' => 'CountryName',
 ];
 
 $pull = ['LC_TIME', 'LC_ADDRESS', 'LC_MESSAGES', 'LC_NUMERIC', 'LC_IDENTIFICATION'];
@@ -51,7 +53,13 @@ while(!feof($fp)) {
 		$val = $locale_data[$k[0]][$k[1]];
 		if (substr($v, -1) == '*') {
 			// as array
-			$val = explode(';', $val);
+			if (!is_array($val)) {
+				if ($val === '') {
+					$val = [];
+				} else {
+					$val = explode(';', $val);
+				}
+			}
 			$v = substr($v, 0, -1);
 		}
 		$av = explode(';', $v);

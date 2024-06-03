@@ -42,6 +42,8 @@ var German = &Lng{
 		NoStr:        "nein",
 		DecimalPoint: ",",
 		ThousandsSep: ".",
+		LangName:     "Deutsch",
+		CountryName:  "Deutschland",
 	},
 }
 
@@ -63,6 +65,8 @@ var AustralianEnglish = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "English",
+		CountryName:  "Canada",
 	},
 }
 
@@ -84,6 +88,8 @@ var EuropeanEnglish = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "English",
+		CountryName:  "United Kingdom",
 	},
 }
 
@@ -105,6 +111,8 @@ var BritishEnglish = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "English",
+		CountryName:  "United Kingdom",
 	},
 }
 
@@ -126,6 +134,8 @@ var AmericanEnglish = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "English",
+		CountryName:  "United States",
 	},
 }
 
@@ -146,6 +156,8 @@ var Spanish = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ",",
 		ThousandsSep: ".",
+		LangName:     "español",
+		CountryName:  "España",
 	},
 }
 
@@ -164,6 +176,8 @@ var MexicanSpanish = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ".",
 		ThousandsSep: " ",
+		LangName:     "español",
+		CountryName:  "México",
 	},
 }
 
@@ -182,6 +196,8 @@ var French = &Lng{
 		NoStr:        "non",
 		DecimalPoint: ",",
 		ThousandsSep: " ",
+		LangName:     "français",
+		CountryName:  "France",
 	},
 }
 
@@ -203,6 +219,8 @@ var Hindi = &Lng{
 		NoStr:        "नहीं",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "हिन्दी",
+		CountryName:  "भारत",
 	},
 }
 
@@ -221,6 +239,8 @@ var Italian = &Lng{
 		NoStr:        "no",
 		DecimalPoint: ",",
 		ThousandsSep: ".",
+		LangName:     "italiano",
+		CountryName:  "Italia",
 	},
 }
 
@@ -245,6 +265,8 @@ var Japanese = &Lng{
 		NoStr:        "いいえ",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "日本語",
+		CountryName:  "日本",
 	},
 }
 
@@ -266,6 +288,8 @@ var Korean = &Lng{
 		NoStr:        "아니요",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "한국어",
+		CountryName:  "대한민국",
 	},
 }
 
@@ -284,6 +308,8 @@ var Dutch = &Lng{
 		NoStr:        "nee",
 		DecimalPoint: ",",
 		ThousandsSep: ".",
+		LangName:     "Nederlands",
+		CountryName:  "Nederland",
 	},
 }
 
@@ -302,6 +328,8 @@ var Polish = &Lng{
 		NoStr:        "nie",
 		DecimalPoint: ",",
 		ThousandsSep: " ",
+		LangName:     "polski",
+		CountryName:  "Polska",
 	},
 }
 
@@ -320,6 +348,8 @@ var BrazilianPortuguese = &Lng{
 		NoStr:        "não",
 		DecimalPoint: ",",
 		ThousandsSep: ".",
+		LangName:     "português",
+		CountryName:  "Brasil",
 	},
 }
 
@@ -337,6 +367,8 @@ var Portuguese = &Lng{
 		YesStr:       "sim",
 		NoStr:        "não",
 		DecimalPoint: ",",
+		LangName:     "português",
+		CountryName:  "Portugal",
 	},
 }
 
@@ -355,6 +387,8 @@ var Russian = &Lng{
 		NoStr:        "нет",
 		DecimalPoint: ",",
 		ThousandsSep: " ",
+		LangName:     "русский",
+		CountryName:  "Россия",
 	},
 }
 
@@ -373,6 +407,8 @@ var Swedish = &Lng{
 		NoStr:        "nej",
 		DecimalPoint: ",",
 		ThousandsSep: " ",
+		LangName:     "svenska",
+		CountryName:  "Sverige",
 	},
 }
 
@@ -398,6 +434,8 @@ var Thai = &Lng{
 		NoStr:        "ไม่ใช่",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "ไทย",
+		CountryName:  "ไทย",
 	},
 }
 
@@ -419,6 +457,8 @@ var SimplifiedChinese = &Lng{
 		NoStr:        "不是",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "中文",
+		CountryName:  "中华人民共和国",
 	},
 }
 
@@ -440,6 +480,7 @@ var HongKongChinese = &Lng{
 		NoStr:        "否",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "繁體中文",
 	},
 }
 
@@ -462,5 +503,7 @@ var TaiwanChinese = &Lng{
 		NoStr:        "不是",
 		DecimalPoint: ".",
 		ThousandsSep: ",",
+		LangName:     "中文",
+		CountryName:  "中華民國",
 	},
 }

@@ -19,12 +19,14 @@ type LngLocale struct {
 	DFmt         string   `json:"D_FMT"`
 	TFmt         string   `json:"T_FMT"`
 	TFmtAmPm     string   `json:"T_FMT_AMPM"`
-	Era          []string `json:"ERA"`
-	EraDTFmt     string   `json:"ERA_D_T_FMT"`
-	EraDFmt      string   `json:"ERA_D_FMT"`
-	EraTFmt      string   `json:"ERA_T_FMT"`
+	Era          []string `json:"ERA,omitempty"`
+	EraDTFmt     string   `json:"ERA_D_T_FMT,omitempty"`
+	EraDFmt      string   `json:"ERA_D_FMT,omitempty"`
+	EraTFmt      string   `json:"ERA_T_FMT,omitempty"`
 	YesStr       string   `json:"YESSTR"`
 	NoStr        string   `json:"NOSTR"`
 	DecimalPoint string   `json:"DECIMAL_POINT"`
 	ThousandsSep string   `json:"THOUSANDS_SEP"`
+	LangName     string   `json:"LANG_NAME"`
+	CountryName  string   `json:"COUNTRY_NAME,omitempty"`
 }
