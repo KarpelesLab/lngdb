@@ -117,6 +117,8 @@ var Spanish = &Lng{
 		Day:   []string{"domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"},
 		AbMon: []string{"ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"},
 		Mon:   []string{"enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"},
+		AmStr: "a. m.",
+		PmStr: "p. m.",
 		DTFmt: "%a %d %b %Y %T",
 		DFmt:  "%d/%m/%y",
 		TFmt:  "%T",
