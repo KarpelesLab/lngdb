@@ -5,22 +5,26 @@ $fp = fopen('languages.csv', 'r');
 $cols = fgetcsv($fp);
 
 $locale_fields = [
-	'ABDAY' => 'AbDay', 'DAY' => 'Day',
-	'ABMON' => 'AbMon', 'MON' => 'Mon',
-	'AM_STR' => 'AmStr', 'PM_STR' => 'PmStr',
-	'D_T_FMT' => 'DTFmt',
-	'D_FMT' => 'DFmt',
-	'T_FMT' => 'TFmt',
-	'T_FMT_AMPM' => 'TFmtAmPm',
-	'ERA' => 'Era',
-	'ERA_D_T_FMT' => 'EraDTFmt',
-	'ERA_D_FMT' => 'EraDFmt',
-	'ERA_T_FMT' => 'EraTFmt',
-	'YESSTR' => 'YesStr',
-	'NOSTR' => 'NoStr',
-	'DECIMAL_POINT' => 'DecimalPoint',
-	'THOUSANDS_SEP' => 'ThousandsSep',
+	'LC_TIME.abday' => 'AbDay*',
+	'LC_TIME.day' => 'Day*',
+	'LC_TIME.abmon' => 'AbMon*',
+	'LC_TIME.mon' => 'Mon*',
+	'LC_TIME.am_pm' => 'AmStr;PmStr*',
+	'LC_TIME.d_t_fmt' => 'DTFmt',
+	'LC_TIME.d_fmt' => 'DFmt',
+	'LC_TIME.t_fmt' => 'TFmt',
+	'LC_TIME.t_fmt_ampm' => 'TFmtAmPm',
+	'LC_TIME.era' => 'Era',
+	'LC_TIME.era_d_t_fmt' => 'EraDTFmt',
+	'LC_TIME.era_d_fmt' => 'EraDFmt',
+	'LC_TIME.era_t_fmt' => 'EraTFmt',
+	'LC_MESSAGES.yesstr' => 'YesStr',
+	'LC_MESSAGES.nostr' => 'NoStr',
+	'LC_NUMERIC.decimal_point' => 'DecimalPoint',
+	'LC_NUMERIC.thousands_sep' => 'ThousandsSep',
 ];
+
+$pull = ['LC_TIME', 'LC_ADDRESS', 'LC_MESSAGES', 'LC_NUMERIC', 'LC_IDENTIFICATION'];
 
 $output = [];
 
@@ -31,25 +35,33 @@ while(!feof($fp)) {
 	$lin = [];
 	foreach($cols as $k => $v) $lin[$v] = $tmp[$k];
 
-	setlocale(LC_TIME, str_replace('-', '_', $lin['token']).'.utf8');
-	setlocale(LC_MESSAGES, str_replace('-', '_', $lin['token']).'.utf8');
-	setlocale(LC_NUMERIC, str_replace('-', '_', $lin['token']).'.utf8');
+	$locale_name = str_replace('-', '_', $lin['token']).'.utf8';
+	$locale_data = [];
+	if ($locale_name == 'en_EU.utf8') $locale_name = 'en_GB.utf8';
+
+	echo "Fetching $locale_name\n";
+
+	foreach($pull as $cat)
+		$locale_data[$cat] = fetch_locale_info($locale_name, $cat);
 
 	$locale = [];
 	foreach($locale_fields as $k => $v) {
-		if (defined($k)) {
-			$locale[$v] = nl_langinfo(constant($k));
+		$k = explode('.', $k);
+		if (!isset($locale_data[$k[0]][$k[1]])) continue;
+		$val = $locale_data[$k[0]][$k[1]];
+		if (substr($v, -1) == '*') {
+			// as array
+			$val = explode(';', $val);
+			$v = substr($v, 0, -1);
+		}
+		$av = explode(';', $v);
+		if (count($av) > 1) {
+			foreach($av as $n => $sv) {
+				$locale[$sv] = $val[$n];
+			}
 			continue;
 		}
-		if (defined($k.'_1')) {
-			$n = 1;
-			$x = [];
-			while(defined($k.'_'.$n)) {
-				$x[] = nl_langinfo(constant($k.'_'.$n));
-				$n += 1;
-			}
-			$locale[$v] = $x;
-		}
+		$locale[$v] = $val;
 	}
 
 	$output[$lin['variable']] = [$lin, $locale];
@@ -82,4 +94,50 @@ foreach($output as $var => $info) {
 	}
 	fwrite($fp, "\t},\n");
 	fwrite($fp, "}\n\n");
+}
+
+function fetch_locale_info($locale_name, $cat) {
+	$res = shell_exec('LANG='.escapeshellarg($locale_name).' /pkg/main/sys-libs.glibc.core/bin/locale -k '.escapeshellarg($cat));
+	$res = explode("\n", $res);
+	$final = [];
+	foreach($res as $lin) {
+		$lin = trim($lin);
+		if ($lin == '') continue;
+
+		// a=
+		// a=""
+		// a="..."
+		// a="...;...;..."
+		// a="...";"...";"..."
+		$pos = strpos($lin, '=');
+		if ($pos === false) continue; // should not happen
+		$var = substr($lin, 0, $pos);
+		$lin = trim(substr($lin, $pos+1));
+		if ($lin == '') {
+			$final[$var] = $lin;
+			continue;
+		}
+		if ($lin[0] != '"') {
+			$final[$var] = $lin;
+			continue;
+		}
+
+		$sub = [];
+		while(strlen($lin) > 0) {
+			$lin = substr($lin, 1);
+			$pos = strpos($lin, '"');
+			if ($pos === false) throw new \Exception('badly formatted var');
+			$sub[] = substr($lin, 0, $pos);
+			$lin = substr($lin, $pos+1);
+			if ($lin === '') break;
+			if ($lin[0] != ';') throw new \Exception('var to var missing ";"');
+			$lin = substr($lin, 1);
+		}
+		if (count($sub) == 1) {
+			$final[$var] = $sub[0];
+		} else {
+			$final[$var] = $sub;
+		}
+	}
+	return $final;
 }
