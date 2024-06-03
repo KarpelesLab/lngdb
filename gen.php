@@ -16,6 +16,10 @@ $locale_fields = [
 	'ERA_D_T_FMT' => 'EraDTFmt',
 	'ERA_D_FMT' => 'EraDFmt',
 	'ERA_T_FMT' => 'EraTFmt',
+	'YESSTR' => 'YesStr',
+	'NOSTR' => 'NoStr',
+	'DECIMAL_POINT' => 'DecimalPoint',
+	'THOUSANDS_SEP' => 'ThousandsSep',
 ];
 
 $output = [];
@@ -28,6 +32,8 @@ while(!feof($fp)) {
 	foreach($cols as $k => $v) $lin[$v] = $tmp[$k];
 
 	setlocale(LC_TIME, str_replace('-', '_', $lin['token']).'.utf8');
+	setlocale(LC_MESSAGES, str_replace('-', '_', $lin['token']).'.utf8');
+	setlocale(LC_NUMERIC, str_replace('-', '_', $lin['token']).'.utf8');
 
 	$locale = [];
 	foreach($locale_fields as $k => $v) {
